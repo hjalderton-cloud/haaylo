@@ -1,0 +1,1 @@
+update public.engine_access set credits_limit = 500 where user_id = 'a9c250d5-7c43-40dd-a83e-65e87bc66a6e' and comp_access = true;

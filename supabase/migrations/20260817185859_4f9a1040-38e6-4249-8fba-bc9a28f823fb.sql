@@ -1,0 +1,2 @@
+ALTER TABLE public.engine_usage ADD COLUMN IF NOT EXISTS free_generations_used integer NOT NULL DEFAULT 0;
+UPDATE public.engine_usage SET free_generations_used = 1 WHERE free_generation_used = true AND free_generations_used = 0;

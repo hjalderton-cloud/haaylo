@@ -17,3 +17,13 @@
 - AI quality-review issues are typed: fact/banned block (needs_review), style/format earn one rewrite but only become warnings; why: human review only where genuinely necessary.
 - Every image prompt (campaign image packs and the image tool) is built from resolveImageBrief() in src/lib/image-grounding.ts — one matched product, objective, setting, audience, brand colours, style; why: prompts never drift to generic marketing imagery when real product/setting facts exist.
 - Saved work is organised as work packages (work_packages + work_package_items in src/lib/packages.functions.ts) that reference existing asset rows by id, never copies; why: calendar, editors and package views must all edit the same record.
+
+## Base44 dev environment
+
+- **Stack:** TanStack Start + Vite + React (SSR), Supabase (remote), OpenAI. Package manager: npm (package-lock.json).
+- **Run:** `docker compose -f docker-compose.base44.yml up -d` — node:22-slim, source bind-mounted at /app, `npm install` then `npm run dev -- --host 0.0.0.0 --port 3000`.
+- **Port:** 3000 (mapped in compose). Health: `GET /` returns 200.
+- **Env:** `.env.base44-defaults` has placeholders; real secrets in `/run/base44/app.env` (loaded last, always wins). `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY` are derived from `SUPABASE_URL`/`SUPABASE_PUBLISHABLE_KEY` in the compose command.
+- **Required credentials:** `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY`, `SUPABASE_SERVICE_ROLE_KEY` (auth + database). `OPENAI_API_KEY` (AI content). Without real Supabase keys the landing page renders but login/data features don't work.
+- **Generated dev secrets:** `TOKEN_ENCRYPTION_KEY`, `LOVABLE_API_KEY` (placeholders — replace for real integrations).
+- **Source restore:** The latest commit had deleted all source; it was restored from the previous commit (`d156cd2`).

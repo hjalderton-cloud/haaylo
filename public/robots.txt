@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://appcontentcollectiv.lovable.app/sitemap.xml

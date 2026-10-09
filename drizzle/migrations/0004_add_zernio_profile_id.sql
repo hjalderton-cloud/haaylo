@@ -1,2 +1,0 @@
-ALTER TABLE public.profiles ADD COLUMN IF NOT EXISTS zernio_profile_id text;
-CREATE UNIQUE INDEX IF NOT EXISTS profiles_zernio_profile_id_key ON public.profiles (zernio_profile_id) WHERE zernio_profile_id IS NOT NULL;

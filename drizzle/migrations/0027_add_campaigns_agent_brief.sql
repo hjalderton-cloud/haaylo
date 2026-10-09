@@ -1,1 +1,0 @@
-ALTER TABLE public.campaigns ADD COLUMN IF NOT EXISTS agent_brief jsonb;

@@ -1,0 +1,1 @@
+ALTER TABLE public.director_recommendations ADD COLUMN IF NOT EXISTS completed_keys text[] NOT NULL DEFAULT '{}';

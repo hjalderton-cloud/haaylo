@@ -1,0 +1,67 @@
+{
+  "previewPort": 3000,
+  "healthPath": "/",
+  "startCommand": "docker compose -f docker-compose.base44.yml up -d",
+  "secrets": [
+    {
+      "name": "SUPABASE_URL",
+      "description": "Your Supabase project URL (e.g. https://zcvahuqajqqvodtezqth.supabase.co). Find it in Supabase Dashboard → Project Settings → API → Project URL.",
+      "requiredAtBoot": true,
+      "generatedForDevelopment": false
+    },
+    {
+      "name": "SUPABASE_PUBLISHABLE_KEY",
+      "description": "Supabase publishable/anon key — the public API key from Supabase Dashboard → Project Settings → API → Project API keys (anon/public).",
+      "requiredAtBoot": true,
+      "generatedForDevelopment": false
+    },
+    {
+      "name": "SUPABASE_SERVICE_ROLE_KEY",
+      "description": "Supabase service role key — the secret server-side key from Supabase Dashboard → Project Settings → API → Project API keys (service_role).",
+      "requiredAtBoot": true,
+      "generatedForDevelopment": false
+    },
+    {
+      "name": "OPENAI_API_KEY",
+      "description": "OpenAI API key for AI content generation. Obtain from https://platform.openai.com/api-keys.",
+      "requiredAtBoot": false,
+      "generatedForDevelopment": false
+    },
+    {
+      "name": "TOKEN_ENCRYPTION_KEY",
+      "description": "Encryption key used to encrypt/decrypt OAuth tokens for social scheduling. Any 32+ character random string.",
+      "requiredAtBoot": false,
+      "generatedForDevelopment": true
+    },
+    {
+      "name": "LOVABLE_API_KEY",
+      "description": "Lovable platform API key (if using Lovable cloud auth integrations).",
+      "requiredAtBoot": false,
+      "generatedForDevelopment": true
+    },
+    {
+      "name": "LINKEDIN_CLIENT_ID",
+      "description": "LinkedIn OAuth client ID (optional — for LinkedIn social posting).",
+      "requiredAtBoot": false,
+      "generatedForDevelopment": false
+    },
+    {
+      "name": "LINKEDIN_CLIENT_SECRET",
+      "description": "LinkedIn OAuth client secret (optional — for LinkedIn social posting).",
+      "requiredAtBoot": false,
+      "generatedForDevelopment": false
+    },
+    {
+      "name": "META_APP_ID",
+      "description": "Meta/Facebook app ID (optional — for Facebook/Instagram social posting).",
+      "requiredAtBoot": false,
+      "generatedForDevelopment": false
+    },
+    {
+      "name": "META_APP_SECRET",
+      "description": "Meta/Facebook app secret (optional — for Facebook/Instagram social posting).",
+      "requiredAtBoot": false,
+      "generatedForDevelopment": false
+    }
+  ]
+}

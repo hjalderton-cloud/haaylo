@@ -30,7 +30,18 @@ async function normalizeCatastrophicSsrResponse(response: Response): Promise<Res
     return response;
   }
 
-  console.error(consumeLastCapturedError() ?? new Error(`h3 swallowed SSR error: ${body}`));
+  const captured = consumeLastCapturedError();
+  // ECONNRESET / aborted errors are transient — the browser closed the
+  // connection while SSR was still running (preview reload, navigation, etc.).
+  // Logging them creates noise without anything to fix.
+  const isTransient =
+    captured instanceof Error &&
+    (/ECONNRESET|aborted/i.test(captured.message) ||
+      (captured as NodeJS.ErrnoException).cause instanceof Error &&
+      /ECONNRESET|aborted/i.test((captured as NodeJS.ErrnoException).cause!.message));
+  if (!isTransient) {
+    console.error(captured ?? new Error(`h3 swallowed SSR error: ${body}`));
+  }
   return new Response(renderErrorPage(), {
     status: 500,
     headers: { "content-type": "text/html; charset=utf-8" },

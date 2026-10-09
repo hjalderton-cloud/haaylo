@@ -165,9 +165,20 @@ function AuthPage() {
   async function handleGoogle() {
     setBusy(true);
     try { window.sessionStorage.setItem(OAUTH_INTENT_KEY, "1"); } catch { /* ignore */ }
+    const redirectTo = `${window.location.origin}/auth${redirect ? `?redirect=${encodeURIComponent(redirect)}` : ""}`;
     try {
+      // Base44 preview: Lovable's /~oauth broker only exists on Lovable hosting,
+      // so use Supabase's native Google provider directly.
+      if (import.meta.env.VITE_BASE44_PREVIEW_MODE === "1") {
+        const { error } = await supabase.auth.signInWithOAuth({
+          provider: "google",
+          options: { redirectTo },
+        });
+        if (error) throw error;
+        return;
+      }
       const result = await lovable.auth.signInWithOAuth("google", {
-        redirect_uri: `${window.location.origin}/auth${redirect ? `?redirect=${encodeURIComponent(redirect)}` : ""}`,
+        redirect_uri: redirectTo,
       });
       if (result.error) throw result.error;
       if (result.redirected) return;
